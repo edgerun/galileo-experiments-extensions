@@ -1,0 +1,1 @@
+env $(cat bin/.env | xargs) jupyter notebook

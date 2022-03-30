@@ -33,9 +33,3 @@ def get_image(url: str) -> str:
 
 def spawn_client_group(profile_paths: List[str], zone: str, rds: redis.Redis, galileo: Galileo, image_url: str):
     c = spawn_zone_group(zone, len(profile_paths), galileo, image_url)
-    time.sleep(1)
-    for index, client in enumerate(c.clients):
-        profile_path = profile_paths[index]
-        clear_list(client.client_id, rds)
-        read_and_save_profile(profile_path, client, rds)
-    return c

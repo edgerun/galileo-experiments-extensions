@@ -3,7 +3,7 @@
 This repository contains examples and ready-to-use implementations of Galileo clients for different service to easily start
 an experiment.
 
-The project mainly depends on the [galileo-experiments](https://github.com/edgerun/galileo-experiments-extensions) repository
+The project mainly depends on the [galileo-experiments](https://github.com/edgerun/galileo-experiments) repository
 and should help newcomers to understand the project with ready to go examples!
 
 # Instructions

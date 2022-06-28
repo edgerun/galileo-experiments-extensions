@@ -8,7 +8,7 @@ and should help newcomers to understand the project with ready to go examples!
 
 # Instructions
 
-For now all documentation (i.e., infrastructure setup, configurations) can be found in the [main project](https://github.com/edgerun/galileo-experiments-extensions).
+For now all documentation (i.e., infrastructure setup, configurations) can be found in the [main project](https://github.com/edgerun/galileo-experiments).
 
 # Run notebooks
 

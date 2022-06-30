@@ -14,15 +14,16 @@ logger = logging.getLogger(__name__)
 def main():
     logging.basicConfig(level=logging._nameToLevel['INFO'])
 
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 7:
         raise ValueError(
-            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node>')
+            'Program takes exactly six arguments: <creator> <host> <container-image> <zone> <master-node> <load-balancer-ip>')
 
     creator = sys.argv[1]
     host = sys.argv[2]
     image = sys.argv[3]
     zone = sys.argv[4]
     master_node = sys.argv[5]
+    lb_ip = sys.argv[6]
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment
     ctx = Context()
@@ -53,7 +54,8 @@ def main():
         no_pods=1,
         n=10,
         ia=0.5,
-        n_clients=1
+        n_clients=1,
+        lb_ip=lb_ip
     )
     run_profiling_workload(workload_config)
 

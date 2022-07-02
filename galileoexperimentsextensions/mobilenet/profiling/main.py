@@ -6,7 +6,7 @@ from galileo.worker.context import Context
 from galileoexperiments.api.model import ProfilingWorkloadConfiguration
 from galileoexperiments.experiment.profiling.run import run_profiling_workload
 
-from galileoexperimentsextensions.mobilenet.profiling.app import MobilenetProfilingApplication
+from galileoexperimentsextensions.mobilenet.app import MobilenetProfilingApplication
 
 logger = logging.getLogger(__name__)
 

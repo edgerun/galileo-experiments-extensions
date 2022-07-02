@@ -34,8 +34,7 @@ def _spawn_group(g: Galileo, clients: int, fn_name: str, service_name: str, imag
 
 class MobilenetProfilingApplication(ProfilingApplication):
 
-    def spawn_group(self, rds: redis.Redis, galileo: Galileo, config: ProfilingWorkloadConfiguration) -> ClientGroup:
-        clients = config.params['exp']['requests']['n_clients']
+    def spawn_group(self, clients: int, rds: redis.Redis, galileo: Galileo, config: ProfilingWorkloadConfiguration) -> ClientGroup:
         zone = config.zone
         image_url = config.params['service']['image_url']
         fn_name = config.params['service']['name']

@@ -35,6 +35,7 @@ def main():
 
     params = {}
 
+    # parameters for each image (used to initialize the clients)
     app_params = {
         mobilenet_image: {
             'service': {

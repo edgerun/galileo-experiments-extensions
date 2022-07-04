@@ -16,29 +16,41 @@ def _prepare_image(url: str):
     return base64.b64encode(r.content).decode('utf-8')
 
 
-def _get_image(url: str) -> str:
-    data = _prepare_image(url)
+def _get_image(location: str, remote: bool) -> str:
+    if remote:
+        data = _prepare_image(location)
+    else:
+        data = _load_image_locally(location)
     return '{"picture": "%s"}' % data
 
 
-def _spawn_zone_group(zone: str, clients: int, g: Galileo, image_url: str, fn_name: str) -> ClientGroup:
-    return _spawn_group(g, clients, fn_name, f'{fn_name}-{zone}', image_url=image_url, labels={'galileo_zone': zone})
+def _load_image_locally(path: str) -> str:
+    with open(path, 'rb') as fd:
+        return base64.b64encode(fd.read()).decode('utf-8')
 
 
-def _spawn_group(g: Galileo, clients: int, fn_name: str, service_name: str, image_url: str, labels: dict = None):
+def _spawn_zone_group(zone: str, clients: int, g: Galileo, location: str, remote: bool, fn_name: str) -> ClientGroup:
+    return _spawn_group(g, clients, fn_name, f'{fn_name}-{zone}', location=location, labels={'galileo_zone': zone},
+                        remote=remote)
+
+
+def _spawn_group(g: Galileo, clients: int, fn_name: str, service_name: str, location: str, remote: bool,
+                 labels: dict = None):
     path = f'/function/{fn_name}'
     return g.spawn(service_name, clients,
-                   parameters={'method': 'post', 'path': path, 'kwargs': {'data': _get_image(image_url)}},
+                   parameters={'method': 'post', 'path': path, 'kwargs': {'data': _get_image(location, remote)}},
                    worker_labels=labels)
 
 
 class MobilenetProfilingApplication(ProfilingApplication):
 
-    def spawn_group(self, clients: int, rds: redis.Redis, galileo: Galileo, config: ProfilingWorkloadConfiguration) -> ClientGroup:
+    def spawn_group(self, clients: int, rds: redis.Redis, galileo: Galileo,
+                    config: ProfilingWorkloadConfiguration) -> ClientGroup:
         zone = config.zone
-        image_url = config.params['service']['image_url']
+        location = config.params['service']['location']
         fn_name = config.params['service']['name']
-        return _spawn_group(galileo, clients, fn_name, f'{fn_name}-{zone}', image_url=image_url,
+        remote = bool(config.params['service']['remote'])
+        return _spawn_group(galileo, clients, fn_name, f'{fn_name}-{zone}', location=location, remote=remote,
                             labels={'galileo_zone': zone})
 
     def pod_factory(self, pod_name: str, image: str, resource_requests: Dict) -> client.V1Container:

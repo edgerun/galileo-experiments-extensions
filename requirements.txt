@@ -1,4 +1,4 @@
-edgerun-galileo-experiments==0.0.1.dev9
+edgerun-galileo-experiments==0.0.2.dev1
 
 pandas==1.4.1
 numpy==1.22.3

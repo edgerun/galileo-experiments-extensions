@@ -19,22 +19,18 @@ def main():
         mobilenet_image: 'mobilenet'
     }
 
-    master_node = 'eb-k3s-master'
+    master_node = 'master-node'
 
+    # node to service mapping including the number of service instances
     services = {
-        'eb-b-xeon-0': {
-            mobilenet_image: 2
-        },
-        'eb-a-controller': {
+        'test-node': {
             mobilenet_image: 1
         }
     }
 
-    zone_a = 'zone-a'
-    zone_b = 'zone-b'
+    # maps nodes that should host applications to zones
     zone_mapping = {
-        'eb-b-xeon-0': zone_b,
-        'eb-a-controller': zone_a
+        'test-node': 'test-zone'
     }
 
     params = {}
@@ -43,7 +39,8 @@ def main():
         mobilenet_image: {
             'service': {
                 'name': 'mobilenet',
-                'image_url': 'https://i.imgur.com/0jx0gP8.png'
+                'location': 'https://i.imgur.com/0jx0gP8.png',
+                'remote': True
             }
         }
     }
@@ -57,18 +54,18 @@ def main():
     rds = ctx.create_redis()
     g = init(rds)
 
+    # load balancer instance of each zone
     lb_ips = {
-        zone_a: '192.168.1.2',
-        zone_b: '192.168.0.101'
+        'test-zone': '127.0.0.1'
     }
 
+    # contains 4 requests
     test_profile = 'data/profiles/test.pkl'
+
+    # client profiles, each starts one client that sends to the zone's load balancer
     profiles = {
-        zone_a: {
-            mobilenet_image: [test_profile, test_profile],
-        },
-        zone_b: {
-            mobilenet_image: [test_profile]
+        'test-zone': {
+            mobilenet_image: [test_profile, test_profile]
         }
     }
 
@@ -88,6 +85,7 @@ def main():
     )
 
     run_scenario_workload(config)
+
 
 if __name__ == '__main__':
     main()

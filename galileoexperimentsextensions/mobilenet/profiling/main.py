@@ -33,6 +33,7 @@ def main():
     # Configure mobilenet specific parameters (i.e., image_url) and define the function name
     params = {
         'service': {
+            'name': 'mobilenet',
             'location': 'https://i.imgur.com/0jx0gP8.png',
             'remote': True,
         }

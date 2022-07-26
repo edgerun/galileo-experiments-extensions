@@ -1,5 +1,4 @@
 import logging
-import sys
 
 from galileo.shell.shell import init
 from galileo.worker.context import Context
@@ -14,7 +13,7 @@ logger = logging.getLogger(__name__)
 def main():
     logging.basicConfig(level=logging._nameToLevel['INFO'])
     creator = 'test'
-    mobilenet_image = 'edgerun/mobilenet-inference:1.1'
+    mobilenet_image = 'edgerun/mobilenet-inference:1.0.0'
     app_names = {
         mobilenet_image: 'mobilenet'
     }
@@ -55,11 +54,6 @@ def main():
     rds = ctx.create_redis()
     g = init(rds)
 
-    # load balancer instance of each zone
-    lb_ips = {
-        'test-zone': '127.0.0.1'
-    }
-
     # contains 4 requests
     test_profile = 'data/profiles/test.pkl'
 
@@ -80,8 +74,6 @@ def main():
         app_params=app_params,
         profiling_apps=profiling_apps,
         context=g,
-
-        lb_ips=lb_ips,
         profiles=profiles
     )
 

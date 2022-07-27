@@ -16,7 +16,7 @@ def main():
 
     if len(sys.argv) != 6:
         raise ValueError(
-            'Program takes exactly six arguments: <creator> <host> <container-image> <zone> <master-node>')
+            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node>')
 
     creator = sys.argv[1]
     host = sys.argv[2]

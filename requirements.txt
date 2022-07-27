@@ -1,4 +1,4 @@
-edgerun-galileo-experiments>=0.0.2.dev8
+edgerun-galileo-experiments>=0.0.2.dev9
 edgerun-request-generator==1.0.0
 
 pandas==1.4.3

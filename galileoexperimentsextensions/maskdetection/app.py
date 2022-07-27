@@ -21,8 +21,7 @@ def _get_image(location: str, remote: bool) -> str:
         data = _prepare_image(location)
     else:
         data = _load_image_locally(location)
-    return data
-
+    return '{"picture": "%s"}' % data
 
 def _load_image_locally(path: str) -> str:
     with open(path, 'rb') as fd:
@@ -38,7 +37,7 @@ def _spawn_group(g: Galileo, clients: int, fn_name: str, service_name: str, loca
                  labels: dict = None):
     path = f'/function/{fn_name}'
     return g.spawn(service_name, clients,
-                   parameters={'method': 'post', 'path': path, 'kwargs': {'data': "%s" % _get_image(location, remote)}},
+                   parameters={'method': 'post', 'path': path, 'kwargs': {'data': _get_image(location, remote)}},
                    worker_labels=labels)
 
 

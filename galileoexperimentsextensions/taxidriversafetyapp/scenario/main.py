@@ -5,6 +5,9 @@ from galileo.worker.context import Context
 from galileoexperiments.api.model import ScenarioWorkloadConfiguration
 from galileoexperiments.experiment.scenario.run import run_scenario_workload
 
+from galileoexperimentsextensions.gundetection.app import GunDetectionProfilingApplication
+from galileoexperimentsextensions.humandetection.app import HumanDetectionProfilingApplication
+from galileoexperimentsextensions.maskdetection.app import MaskDetectionProfilingApplication
 from galileoexperimentsextensions.taxidriversafetyapp.app import TaxiDriverSafetyAppProfilingApplication
 
 logger = logging.getLogger(__name__)
@@ -49,12 +52,31 @@ def main():
                 # 'location': 'https://i.imgur.com/XWPElmP.jpg',
                 'remote': True
             }
+        },
+        humandetection_image: {
+            'service': {
+                'name': 'humandetection'
+            }
+        },
+        maskdetection_image: {
+            'service': {
+                'name': 'maskdetection'
+            }
+        },
+        gundetection_image: {
+            'service': {
+                'name': 'gundetection'
+            }
         }
     }
 
     profiling_apps = {
-        taxidriversafetyapp_image: TaxiDriverSafetyAppProfilingApplication()
+        taxidriversafetyapp_image: TaxiDriverSafetyAppProfilingApplication(),
+        humandetection_image: HumanDetectionProfilingApplication(),
+        maskdetection_image: MaskDetectionProfilingApplication(),
+        gundetection_image: GunDetectionProfilingApplication()
     }
+
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment
     ctx = Context()

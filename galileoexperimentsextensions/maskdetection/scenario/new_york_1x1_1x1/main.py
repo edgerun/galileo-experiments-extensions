@@ -22,14 +22,14 @@ def main():
 
     # node to service mapping including the number of service instances
     services = {
-        'maskdetection-node-1': {
+        'eb-a-controller': {
             maskdetection_image: 1
         }
     }
 
     # maps nodes that should host applications to zones
     zone_mapping = {
-        'maskdetection-node-1': 'zone-a'
+        'eb-a-controller': 'zone-a'
     }
 
     params = {}
@@ -92,8 +92,6 @@ def main():
         profiles=profiles_min,
         context=g
     )
-
-    print(config)
 
     # run min request scenario
     run_scenario_workload(config)

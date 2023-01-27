@@ -34,9 +34,9 @@ def main():
         'service': {
             'name': 'maskdetection',
             # Mask in picture
-            'location': 'https://i.imgur.com/al98FL9.jpg',
+            'location': 'https://i.imgur.com/LpfkZ4D.jpg',
             # No mask in picture
-            # 'location': 'https://i.imgur.com/bqnrbv6.jpg',
+            # 'location': 'https://i.imgur.com/ztir9ww.jpg',
             'remote': True,
         }
     }

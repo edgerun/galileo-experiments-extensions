@@ -32,12 +32,12 @@ def main():
     # humandetection 1x1 1x1 min: 202301271758-38b8
     # humandetection 1x1 1x1 avg: 202301271810-714d
     # humandetection 1x1 1x1 max: 202301271822-e2d4
-    # pose estimation 2x2 2x1 min:202301271856-3ab3
-    # pose estimation 2x2 2x1 avg:
-    # pose estimation 2x2 2x1 max:
+    # pose estimation 2x2 2x1 min: 202301271856-3ab3
+    # pose estimation 2x2 2x1 avg: 202301271908-e7f0
+    # pose estimation 2x2 2x1 max: 202301271920-58c8
     exp_ids = ['202301271722-ad26', '202301271733-d9a2', '202301271745-8fb6',
                '202301271758-38b8', '202301271810-714d', '202301271822-e2d4',
-               '202301271856-3ab3']
+               '202301271856-3ab3', '202301271908-e7f0', '202301271920-58c8']
     for exp_id in exp_ids:
         try:
             traces = pandas.read_csv(exp_id + "_traces.csv")

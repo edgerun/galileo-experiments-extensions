@@ -140,7 +140,7 @@ def main():
     app_params = {
         taxidriversafetyapp_image: {
             'service': {
-                'name': name,
+                'name': "taxidriversafetyapp",
                 'location': picture,
                 'remote': True,
             }

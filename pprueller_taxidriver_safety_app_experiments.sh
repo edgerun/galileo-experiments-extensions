@@ -12,4 +12,3 @@ sleep 60
 python -m galileoexperimentsextensions.taxidriversafetyapp.scenario.scenario pruellerpaul 2 eb-k3s-master taxidriversafetyapp-2-zones-avg data/profiles/new_york_2x2_2x1_avg https://i.imgur.com/CubSR2U.jpg
 sleep 60
 python -m galileoexperimentsextensions.taxidriversafetyapp.scenario.scenario pruellerpaul 2 eb-k3s-master taxidriversafetyapp-2-zones-max data/profiles/new_york_2x2_2x1_max https://i.imgur.com/CubSR2U.jpg
-sleep 60

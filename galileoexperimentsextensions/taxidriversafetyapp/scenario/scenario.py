@@ -34,7 +34,10 @@ def main():
     maskdetection_image = 'edgerun/maskdetection:1.1.0'
 
     app_names = {
-        taxidriversafetyapp_image: "taxidriversafetyapp"
+        taxidriversafetyapp_image: "taxidriversafetyapp",
+        humandetection_image: "humandetection",
+        gundetection_image: "gundetection",
+        maskdetection_image: "maskdetection",
     }
 
     zone_mapping = {
@@ -42,10 +45,10 @@ def main():
     }
     services = {
         "eb-a-controller": {
-            taxidriversafetyapp_image: 1,
             humandetection_image: 1,
             gundetection_image: 1,
             maskdetection_image: 1,
+            taxidriversafetyapp_image: 1,
         }
     }
 

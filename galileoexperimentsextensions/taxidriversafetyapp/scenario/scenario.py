@@ -7,6 +7,9 @@ from galileoexperiments.api.model import ScenarioWorkloadConfiguration
 from galileoexperiments.experiment.scenario.run import run_scenario_workload
 
 from galileoexperimentsextensions.taxidriversafetyapp.app import TaxiDriverSafetyAppProfilingApplication
+from galileoexperimentsextensions.humandetection.app import HumanDetectionProfilingApplication
+from galileoexperimentsextensions.maskdetection.app import MaskDetectionProfilingApplication
+from galileoexperimentsextensions.gundetection.app import GunDetectionProfilingApplication
 
 logger = logging.getLogger(__name__)
 
@@ -145,7 +148,10 @@ def main():
     }
 
     profiling_apps = {
-        taxidriversafetyapp_image: TaxiDriverSafetyAppProfilingApplication()
+        taxidriversafetyapp_image: TaxiDriverSafetyAppProfilingApplication(),
+        humandetection_image: HumanDetectionProfilingApplication(),
+        gundetection_image: GunDetectionProfilingApplication(),
+        maskdetection_image: MaskDetectionProfilingApplication()
     }
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment

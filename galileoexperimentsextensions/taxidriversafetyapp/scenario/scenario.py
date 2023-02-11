@@ -95,7 +95,7 @@ def main():
         zone_mapping = {
             "eb-a-controller": 'zone-a',
             "eb-b-controller": 'zone-b',
-            "eb-c-vm-0": 'zone-c'
+            "eb-c-vm-0": 'zone-a'
         }
         services = {
             "eb-a-controller": {

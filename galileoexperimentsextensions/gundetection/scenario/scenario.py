@@ -74,8 +74,7 @@ def main():
     if zones == "3":
         zone_mapping = {
             "eb-a-controller": 'zone-a',
-            "eb-b-controller": 'zone-b',
-            "eb-c-vm-0": 'zone-a'
+            "eb-b-controller": 'zone-b'
         }
         services = {
             "eb-a-controller": {
@@ -83,21 +82,15 @@ def main():
             },
             "eb-b-controller": {
                 image: 1
-            },
-            "eb-c-vm-0": {
-                image: 1
             }
         }
         profiles_all = {
             'zone-a': {
-                image: [profiles_0]
+                image: [profiles_0, profiles_2]
             },
             'zone-b': {
                 image: [profiles_1]
-            },
-            'zone-c': {
-                image: [profiles_2]
-            },
+            }
         }
 
 

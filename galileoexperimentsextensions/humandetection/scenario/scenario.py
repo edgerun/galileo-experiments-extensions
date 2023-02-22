@@ -74,13 +74,17 @@ def main():
     if zones == "3":
         zone_mapping = {
             "eb-a-controller": 'zone-a',
-            "eb-b-controller": 'zone-b'
+            "eb-b-controller": 'zone-b',
+            "eb-c-vm-0": 'zone-c'
         }
         services = {
             "eb-a-controller": {
                 image: 1
             },
             "eb-b-controller": {
+                image: 1
+            },
+            "eb-c-vm-0": {
                 image: 1
             }
         }

@@ -66,7 +66,8 @@ def main():
     if zones == "2":
         zone_mapping = {
             "eb-a-controller": 'zone-a',
-            "eb-b-controller": 'zone-b'
+            "eb-b-controller": 'zone-b',
+            "eb-c-vm-0": 'zone-c'
         }
         services = {
             "eb-a-controller": {
@@ -76,6 +77,12 @@ def main():
                 maskdetection_image: 1,
             },
             "eb-b-controller": {
+                taxidriversafetyapp_image: 1,
+                humandetection_image: 1,
+                gundetection_image: 1,
+                maskdetection_image: 1,
+            },
+            "eb-c-vm-0": {
                 taxidriversafetyapp_image: 1,
                 humandetection_image: 1,
                 gundetection_image: 1,

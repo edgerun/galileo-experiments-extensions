@@ -168,7 +168,7 @@ def main():
         }
 
     params = {
-        'name': name
+        'name': name + "_" + profiles.rsplit('/', 1)[-1]
     }
 
     profiling_apps = {

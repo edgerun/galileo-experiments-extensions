@@ -18,23 +18,41 @@ def main():
             'Program takes exactly 7 arguments: <creator> <container-image> <zones> <master-node> <name> <profiles> <picture>')
 
     creator = sys.argv[1]
+    # container image
     image = sys.argv[2]
     zones = sys.argv[3]
     master_node = sys.argv[4]
+    # function name
     name = sys.argv[5]
     profiles = sys.argv[6]
     picture = sys.argv[7]
 
+    # each zone gets unique function to avoid that load balancer sends randomly requests across cluster
+    fn_a = f'{name}-zone-a'
+    fn_b = f'{name}-zone-b'
+    fn_c = f'{name}-zone-c'
+
     app_names = {
-        image: name
+        fn_a: image
     }
 
     zone_mapping = {
         "eb-a-controller": 'zone-a'
     }
+
     services = {
         "eb-a-controller": {
-            image: 1
+            fn_a: 1
+        }
+    }
+
+    app_params = {
+        fn_a: {
+            'service': {
+                'name': fn_a,
+                'location': picture,
+                'remote': True,
+            }
         }
     }
 
@@ -45,33 +63,84 @@ def main():
     # client profiles, each starts one client that sends to the zone's load balancer
     profiles_all = {
         'zone-a': {
-            image: [profiles_0]
+            fn_a: [profiles_0]
         },
     }
 
     if zones == "2":
+        app_params = {
+            fn_a: {
+                'service': {
+                    'name': fn_a,
+                    'location': picture,
+                    'remote': True,
+                }
+            },
+            fn_b: {
+                'service': {
+                    'name': fn_b,
+                    'location': picture,
+                    'remote': True,
+                }
+            }
+        }
+        app_names = {
+            fn_a: image,
+            fn_b: image
+        }
+
         zone_mapping = {
             "eb-a-controller": 'zone-a',
             "eb-b-controller": 'zone-b'
         }
         services = {
             "eb-a-controller": {
-                image: 1
+                fn_a: 1
             },
             "eb-b-controller": {
-                image: 1
+                fn_b: 1
             }
         }
 
         profiles_all = {
             'zone-a': {
-                image: [profiles_0]
+                fn_a: [profiles_0]
             },
             'zone-b': {
-                image: [profiles_1]
+                fn_b: [profiles_1]
             },
         }
+
     if zones == "3":
+        app_params = {
+            fn_a: {
+                'service': {
+                    'name': fn_a,
+                    'location': picture,
+                    'remote': True,
+                }
+            },
+            fn_b: {
+                'service': {
+                    'name': fn_b,
+                    'location': picture,
+                    'remote': True,
+                }
+            },
+            fn_c: {
+                'service': {
+                    'name': fn_c,
+                    'location': picture,
+                    'remote': True,
+                }
+            }
+        }
+        app_names = {
+            fn_a: image,
+            fn_b: image,
+            fn_c: image
+        }
+
         zone_mapping = {
             "eb-a-controller": 'zone-a',
             "eb-b-controller": 'zone-b',
@@ -79,41 +148,33 @@ def main():
         }
         services = {
             "eb-a-controller": {
-                image: 1
+                fn_a: 1
             },
             "eb-b-controller": {
-                image: 1
+                fn_b: 1
             },
             "eb-c-vm-0": {
-                image: 1
+                fn_c: 1
             }
         }
         profiles_all = {
             'zone-a': {
-                image: [profiles_0, profiles_2]
+                fn_a: [profiles_0],
+                fn_c: [profiles_2]
             },
             'zone-b': {
-                image: [profiles_1]
+                fn_b: [profiles_1]
             }
         }
-
 
     params = {
         'name': name
     }
 
-    app_params = {
-        image: {
-            'service': {
-                'name': name,
-                'location': picture,
-                'remote': True,
-            }
-        }
-    }
-
     profiling_apps = {
-        image: SleepDetectionProfilingApplication()
+        fn_a: SleepDetectionProfilingApplication(),
+        fn_b: SleepDetectionProfilingApplication(),
+        fn_c: SleepDetectionProfilingApplication()
     }
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment

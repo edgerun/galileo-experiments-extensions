@@ -14,8 +14,9 @@ def main():
     logging.basicConfig(level=logging._nameToLevel['INFO'])
     creator = 'test'
     mobilenet_image = 'edgerun/mobilenet-inference:1.0.0'
+    fn = "mobilenet"
     app_names = {
-        mobilenet_image: 'mobilenet'
+        fn: mobilenet_image
     }
 
     master_node = 'master-node'
@@ -23,7 +24,7 @@ def main():
     # node to service mapping including the number of service instances
     services = {
         'test-node': {
-            mobilenet_image: 1
+            fn: 1
         }
     }
 
@@ -36,9 +37,9 @@ def main():
 
     # parameters for each image (used to initialize the clients)
     app_params = {
-        mobilenet_image: {
+        fn: {
             'service': {
-                'name': 'mobilenet',
+                'name': fn,
                 'location': 'https://i.imgur.com/0jx0gP8.png',
                 'remote': True
             }
@@ -46,7 +47,7 @@ def main():
     }
 
     profiling_apps = {
-        mobilenet_image: MobilenetProfilingApplication()
+        fn: MobilenetProfilingApplication()
     }
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment
@@ -60,7 +61,7 @@ def main():
     # client profiles, each starts one client that sends to the zone's load balancer
     profiles = {
         'test-zone': {
-            mobilenet_image: [test_profile, test_profile]
+            fn: [test_profile, test_profile]
         }
     }
 

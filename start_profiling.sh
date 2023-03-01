@@ -1,0 +1,3 @@
+python -m galileoexperimentsextensions.maskdetection.profiling.main pruellerpaul eb-a-controller edgerun/maskdetection:1.1.0 zone-a eb-k3s-master
+python -m galileoexperimentsextensions.maskdetection.profiling.main pruellerpaul eb-b-controller edgerun/maskdetection:1.1.0 zone-b eb-k3s-master
+python -m galileoexperimentsextensions.maskdetection.profiling.main pruellerpaul eb-c-vm-0 edgerun/maskdetection:1.1.0 zone-c eb-k3s-master

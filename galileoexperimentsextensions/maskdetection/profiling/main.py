@@ -55,8 +55,8 @@ def main():
         params=params,
         profiling_app=maskdetection_profiling_app,
         no_pods=1,
-        n=10,
-        ia=0.5,
+        n=200,
+        ia=2,
         n_clients=1
     )
     run_profiling_workload(workload_config)

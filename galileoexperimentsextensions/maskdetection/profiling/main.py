@@ -32,7 +32,8 @@ def main():
 
     # Configure maskdetection specific parameters (i.e., image_url) and define the function name
     params = {
-        'name': f'{host}-maskdetection',
+        'profiling': True,
+        'host': host,
         'service': {
             'name': 'maskdetection',
             'location': picture,
@@ -55,7 +56,7 @@ def main():
         profiling_app=maskdetection_profiling_app,
         no_pods=1,
         n=2,
-        ia=2,
+        ia=100,
         n_clients=1
     )
     run_profiling_workload(workload_config)

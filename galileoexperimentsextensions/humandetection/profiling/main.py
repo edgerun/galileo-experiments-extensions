@@ -14,9 +14,9 @@ logger = logging.getLogger(__name__)
 def main():
     logging.basicConfig(level=logging._nameToLevel['INFO'])
 
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 7:
         raise ValueError(
-            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
+            'Program takes exactly six arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
 
     creator = sys.argv[1]
     host = sys.argv[2]
@@ -32,9 +32,10 @@ def main():
 
     # Configure humandetection specific parameters (i.e., image_url) and define the function name
     params = {
+        'profiling': True,
+        'host': host,
         'service': {
-            'name': f'{host}-humandetection',
-            # Human in picture
+            'name': 'humandetection',
             'location': picture,
             'remote': True,
         }

@@ -32,12 +32,12 @@ def main():
 
     # Configure Gundetection specific parameters (i.e., image_url) and define the function name
     params = {
-        'profiling': True,
-        'host': host,
         'service': {
             'name': 'gundetection',
             'location': picture,
             'remote': True,
+            'profiling': True,
+            'host': host,
         }
     }
 

@@ -32,12 +32,12 @@ def main():
 
     # Configure Objectdetection specific parameters (i.e., image_url) and define the function name
     params = {
-        'profiling': True,
-        'host': host,
         'service': {
             'name': 'objectdetection',
             'location': picture,
             'remote': True,
+            'profiling': True,
+            'host': host,
         }
     }
 

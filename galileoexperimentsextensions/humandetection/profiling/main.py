@@ -32,12 +32,12 @@ def main():
 
     # Configure humandetection specific parameters (i.e., image_url) and define the function name
     params = {
-        'profiling': True,
-        'host': host,
         'service': {
             'name': 'humandetection',
             'location': picture,
             'remote': True,
+            'profiling': True,
+            'host': host,
         }
     }
 

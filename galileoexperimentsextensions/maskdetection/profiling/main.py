@@ -32,12 +32,12 @@ def main():
 
     # Configure maskdetection specific parameters (i.e., image_url) and define the function name
     params = {
-        'profiling': True,
-        'host': host,
         'service': {
             'name': 'maskdetection',
             'location': picture,
             'remote': True,
+            'profiling': True,
+            'host': host,
         }
     }
 

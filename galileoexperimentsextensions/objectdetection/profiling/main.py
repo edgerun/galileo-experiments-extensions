@@ -16,13 +16,14 @@ def main():
 
     if len(sys.argv) != 6:
         raise ValueError(
-            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node>')
+            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
 
     creator = sys.argv[1]
     host = sys.argv[2]
     image = sys.argv[3]
     zone = sys.argv[4]
     master_node = sys.argv[5]
+    picture = sys.argv[6]
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment
     ctx = Context()
@@ -33,10 +34,7 @@ def main():
     params = {
         'service': {
             'name': 'objectdetection',
-            # Object in picture
-            'location': 'https://i.imgur.com/OacG55z.jpg',
-            # No Object in picture
-            # 'location': 'https://i.imgur.com/bqnrbv6.jpg',
+            'location': picture,
             'remote': True,
         }
     }
@@ -46,7 +44,7 @@ def main():
 
     workload_config = ProfilingWorkloadConfiguration(
         creator=creator,
-        app_name='objectdetection',
+        app_name= f'{host}-objectdetection',
         host=host,
         image=image,
         master_node=master_node,
@@ -55,8 +53,8 @@ def main():
         params=params,
         profiling_app=objectdetection_profiling_app,
         no_pods=1,
-        n=10,
-        ia=0.5,
+        n=100,
+        ia=2,
         n_clients=1
     )
     run_profiling_workload(workload_config)

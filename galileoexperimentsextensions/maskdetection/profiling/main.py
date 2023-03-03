@@ -16,13 +16,14 @@ def main():
 
     if len(sys.argv) != 6:
         raise ValueError(
-            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node>')
+            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
 
     creator = sys.argv[1]
     host = sys.argv[2]
     image = sys.argv[3]
     zone = sys.argv[4]
     master_node = sys.argv[5]
+    picture = sys.argv[6]
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment
     ctx = Context()
@@ -32,11 +33,8 @@ def main():
     # Configure maskdetection specific parameters (i.e., image_url) and define the function name
     params = {
         'service': {
-            'name': 'maskdetection',
-            # Mask in picture
-            'location': 'https://i.imgur.com/LpfkZ4D.jpg',
-            # No mask in picture
-            # 'location': 'https://i.imgur.com/ztir9ww.jpg',
+            'name': f'{host}-maskdetection',
+            'location': picture,
             'remote': True,
         }
     }

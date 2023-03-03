@@ -14,15 +14,16 @@ logger = logging.getLogger(__name__)
 def main():
     logging.basicConfig(level=logging._nameToLevel['INFO'])
 
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 7:
         raise ValueError(
-            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node>')
+            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
 
     creator = sys.argv[1]
     host = sys.argv[2]
     image = sys.argv[3]
     zone = sys.argv[4]
     master_node = sys.argv[5]
+    picture = sys.argv[6]
 
     # Instantiate galileo context that includes all dependencies needed to execute an experiment
     ctx = Context()
@@ -32,11 +33,8 @@ def main():
     # Configure Gundetection specific parameters (i.e., image_url) and define the function name
     params = {
         'service': {
-            'name': 'gundetection',
-            # Gun in picture
-            'location': 'https://i.imgur.com/OacG55z.jpg',
-            # No Gun in picture
-            # 'location': 'https://i.imgur.com/bqnrbv6.jpg',
+            'name': f'{host}-gundetection',
+            'location': picture,
             'remote': True,
         }
     }
@@ -55,8 +53,8 @@ def main():
         params=params,
         profiling_app=gundetection_profiling_app,
         no_pods=1,
-        n=10,
-        ia=0.5,
+        n=100,
+        ia=2,
         n_clients=1
     )
     run_profiling_workload(workload_config)

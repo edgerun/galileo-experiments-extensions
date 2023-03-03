@@ -55,7 +55,7 @@ def main():
         params=params,
         profiling_app=maskdetection_profiling_app,
         no_pods=1,
-        n=200,
+        n=100,
         ia=2,
         n_clients=1
     )

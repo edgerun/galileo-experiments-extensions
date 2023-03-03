@@ -14,9 +14,9 @@ logger = logging.getLogger(__name__)
 def main():
     logging.basicConfig(level=logging._nameToLevel['INFO'])
 
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 7:
         raise ValueError(
-            'Program takes exactly five arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
+            'Program takes exactly six arguments: <creator> <host> <container-image> <zone> <master-node> <picture>')
 
     creator = sys.argv[1]
     host = sys.argv[2]
@@ -32,8 +32,9 @@ def main():
 
     # Configure maskdetection specific parameters (i.e., image_url) and define the function name
     params = {
+        'name': f'{host}-maskdetection',
         'service': {
-            'name': f'{host}-maskdetection',
+            'name': 'maskdetection',
             'location': picture,
             'remote': True,
         }
@@ -53,7 +54,7 @@ def main():
         params=params,
         profiling_app=maskdetection_profiling_app,
         no_pods=1,
-        n=100,
+        n=2,
         ia=2,
         n_clients=1
     )

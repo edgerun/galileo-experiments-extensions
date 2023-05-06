@@ -58,7 +58,7 @@ def main():
 
     profiles_0 = profiles + '/0_pickups.pkl'
     profiles_1 = profiles + '/1_pickups.pkl'
-    profiles_2 = profiles + '/2_pickups.pkl'
+    profiles_2 = profiles + '/3_pickups.pkl'
 
     # client profiles, each starts one client that sends to the zone's load balancer
     profiles_all = {
